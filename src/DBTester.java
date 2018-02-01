@@ -7,7 +7,10 @@ public class DBTester {
 
     void connectToDB() throws SQLException{
 
-        connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/groupdb", "SA", "");
+        String macosUrl = "jdbc:hsqldb:hsql://localhost/groupdb";
+        String windowsUrl = null;
+
+        connection = DriverManager.getConnection(macosUrl, "SA", "");
     }
 
     void doWork(Connection c) throws SQLException{
@@ -41,7 +44,6 @@ public class DBTester {
     }
 
     void viewItems(){
-
         ResultSet result = null;
         try(Statement statement = connection.createStatement()) {
             result = statement.executeQuery("SELECT * FROM ITEM");
@@ -59,6 +61,7 @@ public class DBTester {
         }
     }
 
+    // "УНИВЕРСАЛЬНЫЙ" МЕТОД ПЕЧАТИ ВСЕГО СОДЕРЖИМОГО ТАБЛИЦЫ С ЗАГОЛОВКАМИ ИЗ НАЗВАНИЙ СТОЛБЦОВ (П.6 ДОП)
     void printContent(){
         ResultSet result = null;
         try(Statement statement = connection.createStatement()) {
@@ -87,26 +90,6 @@ public class DBTester {
             }
         }
     }
-
-    /*void viewContent() throws SQLException{
-        Connection c = connectToDB();
-
-        Statement statement = c.createStatement();
-
-        statement.execute("SELECT * FROM ITEM");
-        ResultSet itemgroups = statement.getResultSet();
-
-        statement.execute("SELECT * FROM ITEMGROUP");
-        ResultSet items = statement.getResultSet();
-
-
-        while (items.next()) {
-            String student = items.getString("TITLE");
-            String group =
-            System.out.printf("%10s из %5s", );
-        }
-        c.close();
-    }*/
 
     int getGroupID(String key){
         //Connection c = connectToDB();
