@@ -7,9 +7,10 @@ public class Main {
             DBTester tester = new DBTester();
             tester.connectToDB();
             tester.test();
-            tester.viewGroups();
-            tester.viewItems();
-            tester.printContent();
+            //tester.viewGroups();
+            //tester.viewItems();
+            //tester.printContent();
+            //tester.viewItemsInGroup(2);
             tester.connection.close();
 
         } catch (SQLException e) {
