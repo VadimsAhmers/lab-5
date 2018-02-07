@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="hsqldb-2.4.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/hsqldb-2.4.0.jar!/" />
+      <root url="jar:///Volumes/MacStore/Apps/Developer/hsqldb-2.4.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
