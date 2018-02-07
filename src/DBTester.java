@@ -289,14 +289,16 @@ public class DBTester {
         try(Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             BufferedReader br = new BufferedReader(new InputStreamReader
                     (new FileInputStream("groups.txt")));
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM ITEMGROUP")){
+            ResultSet resultSet = statement.executeQuery("SELECT ID,TITLE FROM ITEMGROUP")){
 
             connection.setAutoCommit(false);
             String s;
 
             while ((s=br.readLine())!=null) {
                 if (s.contains("++")) {
-                    groupsToAdd.add(s.replace("++", ""));
+                    String toAdd = s.replace("++", "");
+                    if (groupsToRemove.contains(toAdd)) groupsToRemove.remove(toAdd);
+                    else groupsToAdd.add(toAdd);
                 }else
                 if (s.contains("--")) {
                     String toDelete = s.replace("--", "");
@@ -320,6 +322,11 @@ public class DBTester {
                 }
             connection.commit();
         }catch (Exception e){
+            try {
+                connection.rollback();
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }finally {
             try {
